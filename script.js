@@ -1,0 +1,1 @@
+const drawer=document.getElementById('drawer');const menu=document.querySelector('.menu');const year=document.getElementById('year');if(year){year.textContent=new Date().getFullYear();}if(menu&&drawer){menu.addEventListener('click',()=>{drawer.toggleAttribute('hidden');});}

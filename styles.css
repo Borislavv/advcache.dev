@@ -1,0 +1,84 @@
+/* Design tokens */
+:root{
+  --bg:#0b1020; --text:#e6ebff; --muted:#9aa3b2;
+  --card:#10162e; --stroke:#1e2a4a;
+  --p1:#6a7dff; --p2:#8a4bff;
+}
+*{box-sizing:border-box} body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text);
+  background: radial-gradient(1200px 800px at 20% -10%, rgba(106,125,255,.15), transparent 60%),
+              radial-gradient(1000px 700px at 80% -20%, rgba(138,75,255,.12), transparent 60%),
+              var(--bg);
+}
+.container{max-width:1120px; margin:0 auto; padding:0 24px}
+/* Nav */
+.nav{position:sticky; top:0; background:rgba(11,16,32,.6); backdrop-filter:saturate(140%) blur(10px); border-bottom:1px solid rgba(255,255,255,.06); z-index:50}
+.nav-inner{display:flex; align-items:center; justify-content:space-between; height:64px}
+.brand{display:flex; align-items:center; gap:10px; color:var(--text); text-decoration:none; font-weight:800}
+.logo{width:28px; height:28px}.logo.small{width:22px;height:22px}
+.links{display:flex; gap:20px; align-items:center}
+.links a{color:var(--muted); text-decoration:none; font-weight:600}
+.links a:hover{color:var(--text)}
+.btn{display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:12px; border:1px solid #2a3761; color:var(--text); text-decoration:none}
+.btn.primary{background:linear-gradient(90deg,var(--p1),var(--p2)); border:0; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.btn.outline{background:transparent}
+.btn.ghost{background:rgba(255,255,255,.04)}
+.menu{display:none; background:none; border:0; padding:8px; cursor:pointer}
+.menu span{display:block; width:22px; height:2px; background:#bcd; margin:4px 0; border-radius:2px}
+.mobile-drawer{display:none; flex-direction:column; padding:12px 24px; border-bottom:1px solid rgba(255,255,255,.06); background:rgba(11,16,32,.95)}
+.mobile-drawer a{padding:10px 0; color:var(--text); text-decoration:none; font-weight:600}
+
+/* Hero */
+.hero{position:relative; padding:92px 0 40px}
+.headline{font-size:56px; line-height:1.05; margin:0 0 14px; letter-spacing:-0.02em}
+.gradient{background:linear-gradient(90deg,var(--p1),var(--p2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.subhead{max-width:760px; color:var(--muted); font-size:18px}
+.cta{display:flex; gap:14px; margin-top:24px}
+.blur1,.blur2{position:absolute; filter:blur(80px); opacity:.35; z-index:-1}
+.blur1{width:360px; height:360px; left:10%; top:-60px; background:radial-gradient(closest-side, var(--p1), transparent)}
+.blur2{width:420px; height:420px; right:8%; top:-80px; background:radial-gradient(closest-side, var(--p2), transparent)}
+
+/* Sections */
+.about,.project,.quickstart,.endpoints,.cta-band{padding:64px 0}
+h2{font-size:28px; margin:0 0 16px}
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.feat{background:var(--card); border:1px solid var(--stroke); border-radius:16px; padding:18px}
+.contacts{display:grid; grid-template-columns:repeat(2,minmax(220px,1fr)); gap:10px; padding-left:18px}
+pre{background:#0c1226; border:1px solid var(--stroke); border-radius:14px; padding:14px; overflow:auto}
+.cols{columns:2; gap:24px}
+.cta-band .row{display:flex; align-items:center; justify-content:space-between; background:linear-gradient(90deg, rgba(106,125,255,.2), rgba(138,75,255,.2)); border:1px solid var(--stroke); border-radius:16px; padding:22px 20px}
+
+/* Footer */
+.footer{padding:40px 0}
+.footer-inner{display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(255,255,255,.06); padding-top:20px}
+.brand-row{display:flex; gap:10px; align-items:center}
+.foot-links{display:flex; gap:14px}
+.fine{color:var(--muted); font-size:14px}
+
+@media (max-width:960px){
+  .grid{grid-template-columns:1fr 1fr}
+  .cols{columns:1}
+  .cta-band .row{flex-direction:column; gap:14px; text-align:center}
+}
+@media (max-width:720px){
+  .links{display:none}
+  .menu{display:block}
+  .mobile-drawer{display:flex}
+  .headline{font-size:38px}
+  .grid{grid-template-columns:1fr}
+}
+
+
+/* Accent outline for About Me block */
+
+@media (min-width: 768px){
+  
+}
+
+
+/* Constrain About block to container width */
+
+@media (min-width: 640px){  }  /* sm:px-6 */
+@media (min-width: 1024px){  }    /* lg:px-8 */
+
+
+/* About block: follow container width (no extra max-width or side paddings) */

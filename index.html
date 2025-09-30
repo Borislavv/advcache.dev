@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>advCache — Borislav Glazunov</title>
+  <meta name="description" content="High‑performance in‑memory HTTP cache & reverse proxy. advCache by Borislav Glazunov." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <img src="./assets/logo.svg" alt="advCache" class="logo" />
+        <span>advCache</span>
+      </a>
+      <nav class="links">
+        <a href="#about">About</a>
+        <a href="#project">Project</a>
+        <a href="#quickstart">Quickstart</a>
+        <a href="#endpoints">Endpoints</a>
+        <a href="https://github.com/Borislavv/adv-cache" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/boris-glazunov-0ab666234/?locale=en_US" target="_blank" class="btn ghost">LinkedIn</a>
+      </nav>
+      <button class="menu" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-drawer" id="drawer" hidden>
+      <a href="#about">About</a>
+      <a href="#project">Project</a>
+      <a href="#quickstart">Quickstart</a>
+      <a href="#endpoints">Endpoints</a>
+      <a href="https://github.com/Borislavv/adv-cache" target="_blank">GitHub</a>
+      <a href="https://t.me/gl_c137" target="_blank">Telegram</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1 class="headline">advCache <span class="gradient">by Borislav Glazunov</span></h1>
+        <p class="subhead">
+          High‑performance in‑memory HTTP cache & reverse proxy for latency‑sensitive workloads.<br/>
+          Built in Go with sharded storage, TinyLFU admission, background refresh, upstream controls, and observability.
+        </p>
+        <div class="cta">
+          <a href="#quickstart" class="btn primary">Get Started</a>
+          <a href="https://github.com/Borislavv/adv-cache" class="btn outline" target="_blank">View Source</a>
+        </div>
+      </div>
+      <div class="blur1"></div><div class="blur2"></div>
+    </section>
+
+    <section class="about " id="about">
+      <div class="container">
+        <h2>About Me</h2>
+        <p>I’m <strong>Borislav Glazunov</strong>, 29 y.o., senior/lead developer (Golang, Rust, PHP).<br/>
+        Open to <em>visa sponsorship</em> in New Zealand, Australia, Canada, EU, and Cyprus.</p>
+        <ul class="contacts">
+          <li>GitHub: <a href="https://github.com/Borislavv" target="_blank">github.com/Borislavv</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/boris-glazunov-0ab666234/?locale=en_US" target="_blank">Profile</a></li>
+          <li>Telegram: <a href="https://t.me/gl_c137" target="_blank">@gl_c137</a></li>
+          <li>Email: <a href="mailto:glazunov2142@gmail.com">glazunov2142@gmail.com</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="project" id="project">
+      <div class="container">
+        <h2>About the Project</h2>
+        <p><strong><a href="https://github.com/Borislavv/adv-cache" target="_blank">advCache</a></strong> — open‑source (Apache‑2.0) in‑memory HTTP cache & reverse proxy.</p>
+        <div class="grid">
+          <article class="feat"><h3>Throughput</h3><p>160–170k RPS locally; ~250k RPS on 24‑core bare‑metal (50GB cache).</p></article>
+          <article class="feat"><h3>Memory</h3><p>1.5–3GB overhead at 50GB (no traces); ~7GB at 100% OTEL sampling.</p></article>
+          <article class="feat"><h3>Hot Path</h3><p>Zero allocations, sharded counters, per‑shard LRU, TinyLFU admission.</p></article>
+          <article class="feat"><h3>Control Plane</h3><p>Runtime toggles: admission, eviction, refresh, compression, observability.</p></article>
+          <article class="feat"><h3>Observability</h3><p>Prometheus/VictoriaMetrics + OpenTelemetry tracing.</p></article>
+          <article class="feat"><h3>Kubernetes</h3><p>Health probes, ConfigMap config, Docker image.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quickstart" id="quickstart">
+      <div class="container">
+        <h2>Quickstart (Starter Config)</h2>
+<pre><code>cache:
+  api:
+    port: '8020'   # &lt;-- CHANGEME
+  upstream:
+    backend:
+      addr: http://127.0.0.1:8081   # &lt;-- CHANGEME origin
+  compression:
+    enabled: true
+  observability:
+    enabled: true
+    endpoint: 127.0.0.1:4318       # &lt;-- CHANGEME OTEL Collector
+  admission:
+    enabled: true</code></pre>
+        <p>See the full configuration in the repo README.</p>
+      </div>
+    </section>
+
+    <section class="endpoints" id="endpoints">
+      <div class="container">
+        <h2>Runtime Endpoints</h2>
+        <ul class="cols">
+          <li>Main: <code>GET /{any:*}</code></li>
+          <li>Health: <code>GET /k8s/probe</code></li>
+          <li>Metrics: <code>GET /metrics</code></li>
+          <li>Bypass: <code>/cache/bypass</code>, <code>/on</code>, <code>/off</code></li>
+          <li>Compression: <code>/cache/http/compression</code>, <code>/on</code>, <code>/off</code></li>
+          <li>Config: <code>/cache/config</code></li>
+          <li>Entry: <code>/cache/entry?key=&lt;uint64&gt;</code></li>
+          <li>Clear: <code>/cache/clear</code> → <code>?token=</code></li>
+          <li>Invalidate: <code>/cache/invalidate</code></li>
+          <li>Upstream: <code>/cache/upstream/policy</code>, <code>/await</code>, <code>/deny</code></li>
+          <li>Evictor: <code>/cache/eviction</code>, <code>/on</code>, <code>/off</code>, <code>/scale</code></li>
+          <li>Lifetime: <code>/cache/lifetime-manager</code>, <code>/on</code>, <code>/off</code></li>
+          <li>GC: <code>/cache/force-gc</code>, <code>/on</code>, <code>/off</code>, <code>/call</code></li>
+          <li>Admission: <code>/cache/admission</code>, <code>/on</code>, <code>/off</code></li>
+          <li>Tracing: <code>/cache/observability</code>, <code>/on</code>, <code>/off</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta-band" id="github">
+      <div class="container row">
+        <div><h3>Open Source & Modular</h3><p>Apache‑2.0 license. Contributions welcome.</p></div>
+        <a class="btn primary" href="https://github.com/Borislavv/adv-cache" target="_blank">Star on GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand-row"><img src="./assets/logo.svg" class="logo small" alt="advCache"/><span>advCache</span></div>
+      <nav class="foot-links"><a href="#about">About</a><a href="#project">Project</a><a href="#quickstart">Quickstart</a></nav>
+      <p class="fine">© <span id="year"></span> Borislav Glazunov — <a href="mailto:glazunov2142@gmail.com">glazunov2142@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
